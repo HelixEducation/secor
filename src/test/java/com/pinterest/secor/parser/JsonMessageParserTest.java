@@ -88,14 +88,19 @@ public class JsonMessageParserTest extends TestCase {
     public void testExtractPartitions() throws Exception {
         JsonMessageParser jsonMessageParser = new JsonMessageParser(mConfig);
 
-        String expectedPartition = "dt=2014-07-21";
+        String[] expectedPartitions = {"2014", "07", "21"};
 
         String resultSeconds[] = jsonMessageParser.extractPartitions(mMessageWithSecondsTimestamp);
-        assertEquals(1, resultSeconds.length);
-        assertEquals(expectedPartition, resultSeconds[0]);
+        assertEquals(expectedPartitions.length, resultSeconds.length);
+        for (int i=1; i<expectedPartitions.length; i++) {
+        	assertEquals(expectedPartitions[i], resultSeconds[i]);
+        }
 
         String resultMillis[] = jsonMessageParser.extractPartitions(mMessageWithMillisTimestamp);
-        assertEquals(1, resultMillis.length);
-        assertEquals(expectedPartition, resultMillis[0]);
+        assertEquals(expectedPartitions.length, resultMillis.length);
+        for (int i=1; i<expectedPartitions.length; i++) {
+        	assertEquals(expectedPartitions[i], resultMillis[i]);
+        }
+        
     }
 }

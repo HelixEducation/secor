@@ -29,7 +29,7 @@ public abstract class TimestampedMessageParser extends MessageParser {
 
     public TimestampedMessageParser(SecorConfig config) {
         super(config);
-        mFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        mFormatter = new SimpleDateFormat("yyyy/MM/dd");
         mFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
@@ -54,7 +54,7 @@ public abstract class TimestampedMessageParser extends MessageParser {
         // Date constructor takes milliseconds since epoch.
         long timestampMillis = extractTimestampMillis(message);
         Date date = new Date(timestampMillis);
-        String result[] = {"dt=" + mFormatter.format(date)};
+        String result[] = mFormatter.format(date).split("/");
         return result;
     }
 }

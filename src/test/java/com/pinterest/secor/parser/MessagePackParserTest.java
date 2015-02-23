@@ -119,14 +119,18 @@ public class MessagePackParserTest extends TestCase {
 
     @Test
     public void testExtractPartitions() throws Exception {
-        String expectedPartition = "dt=2014-07-21";
-
+    	String[] expectedPartitions = {"2014", "07", "21"};
+    	
         String resultSeconds[] = mMessagePackParser.extractPartitions(mMessageWithSecondsTimestamp);
-        assertEquals(1, resultSeconds.length);
-        assertEquals(expectedPartition, resultSeconds[0]);
+        assertEquals(expectedPartitions.length, resultSeconds.length);
+        for (int i=1; i<expectedPartitions.length; i++) {
+        	assertEquals(expectedPartitions[i], resultSeconds[i]);
+        }
 
         String resultMillis[] = mMessagePackParser.extractPartitions(mMessageWithMillisTimestamp);
-        assertEquals(1, resultMillis.length);
-        assertEquals(expectedPartition, resultMillis[0]);
+        assertEquals(expectedPartitions.length, resultMillis.length);
+        for (int i=1; i<expectedPartitions.length; i++) {
+        	assertEquals(expectedPartitions[i], resultMillis[i]);        
+        }
     }
 }
