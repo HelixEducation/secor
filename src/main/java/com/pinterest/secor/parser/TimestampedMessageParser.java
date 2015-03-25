@@ -29,7 +29,7 @@ public abstract class TimestampedMessageParser extends MessageParser {
 
     public TimestampedMessageParser(SecorConfig config) {
         super(config);
-        mFormatter = new SimpleDateFormat("yyyy/MM/dd");
+        mFormatter = new SimpleDateFormat("yyyy/MM/dd/HH");
         mFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
