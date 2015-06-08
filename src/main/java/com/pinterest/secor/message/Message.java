@@ -36,7 +36,6 @@ public class Message {
                ", kafkaPartition=" + mKafkaPartition +
                ", offset=" + mOffset +
                ", payload=" + new String(mPayload);
-
     }
 
     @Override
@@ -48,7 +47,11 @@ public class Message {
         mTopic = topic;
         mKafkaPartition = kafkaPartition;
         mOffset = offset;
-        mPayload = payload;
+        if (null == payload) {
+            mPayload = new byte[0];
+        } else {
+            mPayload = payload;
+        }
     }
 
     public String getTopic() {
