@@ -44,10 +44,14 @@ public class Message {
     }
 
     public Message(String topic, int kafkaPartition, long offset, byte[] payload) {
-        mTopic = (null == topic) ? new String() : topic;
+        mTopic = topic;
         mKafkaPartition = kafkaPartition;
         mOffset = offset;
-        mPayload = (null == payload) ? new byte[0] : payload;
+        if (null == payload) {
+            mPayload = new byte[0];
+        } else {
+            mPayload = payload;
+        }
     }
 
     public String getTopic() {
